@@ -6,40 +6,29 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const CartProperty = () => {
-  const [data, setData] = useState<Property[] | null>(null);
+  const [data, setData] = useState<Property[] | null>();
 
   const baseUrl = "https://housivity-production.s3.ap-south-1.amazonaws.com";
 
   useEffect(() => {
     const stored = localStorage.getItem("cart");
-    console.log(stored);
-    if (stored) {
-      setData(JSON.parse(stored));
-    }
-  }, []);
-
-  const [items, setItems] = useState<Property[]>([]);
-
-  // Load cart data from localStorage
-  useEffect(() => {
-    const storageData = localStorage.getItem("cart");
-    if (storageData) {
-      setItems(JSON.parse(storageData));
+    const parsedData = !!stored ? JSON.parse(stored) : [];
+    if (parsedData?.length) {
+      setData(parsedData);
     }
   }, []);
 
   // Remove item function
   const handleRemove = ({ property_id }: { property_id: string }) => {
-    const updatedItems = items.filter((item) => item?._id !== property_id);
-
+    const updatedItems = data?.length
+      ? data.filter((item) => item?._id !== property_id)
+      : [];
     if (updatedItems) {
-      setItems(updatedItems);
+      setData(updatedItems);
       localStorage.setItem("cart", JSON.stringify(updatedItems));
     }
-
-    console.log("=========", items);
   };
-  return (
+  return !!data ? (
     <div>
       {data?.map((property, index) => {
         const thumbnailUrl = property?.data?.media?.thumbnail?.replace(
@@ -87,6 +76,8 @@ const CartProperty = () => {
         }
       })}
     </div>
+  ) : (
+    "Please select property"
   );
 };
 

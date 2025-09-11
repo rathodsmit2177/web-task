@@ -16,13 +16,17 @@ export const PropertyCard = ({ data }: { data: Property }) => {
     const localData = localStorage.getItem("cart");
 
     const finalData = !!localData ? JSON.parse(localData) : [];
-    const updated = [...(finalData ? [...finalData] : []), data];
+
+    const updated =
+      finalData?._id == data?._id
+        ? prompt("This property is the alrady liked")
+        : [...(finalData ? [...finalData] : []), data];
     localStorage.setItem("cart", JSON.stringify(updated));
     alert("updated");
   };
 
   return (
-    <div className="p-4  mx-5 rounded-lg bg-gray-100 shadow flex flex-col ">
+    <div className="p-4  mx-5 rounded-lg bg-gray-100 shadow ">
       {thumbnailUrl ? (
         <Image
           src={thumbnailUrl}

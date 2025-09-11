@@ -16,6 +16,23 @@ export interface Property {
   data: PropertyData;
 }
 
+export interface Form {
+  propertyname: string;
+  groupname: string;
+  address: string;
+  price: string;
+  configuration: string;
+  size: string;
+  launchdate: string;
+  // property_name: string;
+}
+
+export interface Count {
+  count: number;
+  increase: number;
+  decrease: number;
+}
+
 export interface PropertyData {
   depositAmount: number;
   faq: string[];

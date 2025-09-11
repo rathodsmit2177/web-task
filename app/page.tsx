@@ -25,9 +25,9 @@ export default async function Home() {
   return (
     <div className="py-20  px-15">
       <h1 className="text-xl font-bold mb-4">Properties</h1>
-      <div className="grid grid-cols-3 gap-4">
-        {properties?.map((el, index) => (
-          <PropertyCard key={index} data={el} />
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {properties?.map((el) => (
+          <PropertyCard key={el?._id} data={el} />
         ))}
       </div>
     </div>
