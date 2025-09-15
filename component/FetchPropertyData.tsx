@@ -7,13 +7,6 @@ import React, { useEffect, useState } from "react";
 export const FetchPropertyData = () => {
   const [data, setData] = useState<Form[] | null>();
   const router = useRouter();
-  useEffect(() => {
-    const localdata = localStorage.getItem("PropertyForm");
-    const finalData = !!localdata ? JSON.parse(localdata) : [];
-    if (finalData?.length) {
-      setData(finalData);
-    }
-  }, []);
 
   const handleRemove = ({ property_name }: { property_name: string }) => {
     const updatedData = data?.length
@@ -28,6 +21,14 @@ export const FetchPropertyData = () => {
   const handleUpdate = ({ property_name }: { property_name: string }) => {
     router.push(`/update?propertyname=${property_name}`);
   };
+
+  useEffect(() => {
+    const localdata = localStorage.getItem("PropertyForm");
+    const finalData = !!localdata ? JSON.parse(localdata) : [];
+    if (finalData?.length) {
+      setData(finalData);
+    }
+  }, []);
 
   return !!data ? (
     <div className="py-20 px-20 ">

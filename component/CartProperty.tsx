@@ -10,15 +10,6 @@ const CartProperty = () => {
 
   const baseUrl = "https://housivity-production.s3.ap-south-1.amazonaws.com";
 
-  useEffect(() => {
-    const stored = localStorage.getItem("cart");
-    const parsedData = !!stored ? JSON.parse(stored) : [];
-    if (parsedData?.length) {
-      setData(parsedData);
-    }
-  }, []);
-
-  // Remove item function
   const handleRemove = ({ property_id }: { property_id: string }) => {
     const updatedItems = data?.length
       ? data.filter((item) => item?._id !== property_id)
@@ -28,6 +19,13 @@ const CartProperty = () => {
       localStorage.setItem("cart", JSON.stringify(updatedItems));
     }
   };
+  useEffect(() => {
+    const stored = localStorage.getItem("cart");
+    const parsedData = !!stored ? JSON.parse(stored) : [];
+    if (parsedData?.length) {
+      setData(parsedData);
+    }
+  }, []);
   return !!data ? (
     <div>
       {data?.map((property, index) => {

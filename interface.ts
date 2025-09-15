@@ -16,6 +16,29 @@ export interface Property {
   data: PropertyData;
 }
 
+export interface Products {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  returnPolicy: string;
+  minimumOrderQuantity: number;
+  images: string[];
+  thumbnail: string;
+  reviews: {
+    rating: number;
+    comment: string;
+    date: string;
+    reviewerName: string;
+    reviewerEmail: string;
+  };
+}
+
 export interface Form {
   propertyname: string;
   groupname: string;

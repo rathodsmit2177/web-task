@@ -15,12 +15,13 @@ const Header = () => {
           />
         </Link>
         <div className=" mr-10 gap-10 flex items-center cursor-pointer md:text-lg mg:w-max-text-sm lg:text-xl">
+          <Link href="/dummyData">Data </Link>
           <Link href="/forinvestor">For Investor</Link>
           <Link
             href="/about"
             className="border-2 px-4 border-orange-400 hover:bg-orange-300 rounded-lg"
           >
-            About
+            Forms
           </Link>
           <Link
             href="/cart"
