@@ -1,12 +1,7 @@
-import { PaginationControl } from "@/component/PaginationControl";
-import { PropertyCard } from "@/component/PropertyCard";
+import { PgData } from "@/component/PgData";
 import { Property } from "@/interface";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+export default async function Propertypage() {
   const url = "https://api.housivity.com/production/api/v2/properties";
 
   const payload = {
@@ -26,24 +21,15 @@ export default async function Home({
 
   const data = await response.json();
   const properties: Property[] = data?.data;
-
-  const page = searchParams["page"] ?? "1";
-  const per_page = searchParams["per_page"] ?? "6";
-
-  const start = (Number(page) - 1) * Number(per_page);
-  const end = start + Number(per_page);
-
-  const Items = properties.slice(start, end);
-
+  console.log("===========", properties);
   return (
     <div className="py-20  px-15">
       <h1 className="text-xl font-bold mb-4">Properties</h1>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {Items?.map((el) => (
-          <PropertyCard key={el?._id} data={el} />
+        {properties?.map((el) => (
+          <PgData key={el?._id} data={el} />
         ))}
       </div>
-      <PaginationControl />
     </div>
   );
 }

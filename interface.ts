@@ -1,12 +1,13 @@
 export interface Property {
   _id: string;
-  id: string;
+  id: string | number;
   name: string;
   sellerDetails: {
     _id: string;
     companyName: string;
     type: number;
   };
+
   address: {
     address: string;
     area: string;

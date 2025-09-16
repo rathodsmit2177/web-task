@@ -3,6 +3,10 @@
 // import { useEffect, useState } from "react";
 // import { useInView } from "react-intersection-observer";
 
+import { Products } from "@/interface";
+import { useEffect, useState } from "react";
+import { InView, useInView } from "react-intersection-observer";
+
 // export default async function Xyz() {
 //   const [data, setData] = useState<Products[]>([]);
 //   const [page, setPage] = useState<number>(1);

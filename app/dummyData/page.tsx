@@ -11,38 +11,49 @@ export default function DummyData() {
   const [hasMore, setHasMore] = useState<boolean>(true);
 
   const { ref, inView } = useInView({
-    thresholde: 0,
+    threshold: 0,
   });
 
-  const fetchData = async (pageNumber: number | string) => {
+  const fetchData = async (pageNumber: number) => {
     setIsLoading(true);
     try {
+      const limit = 3;
+      const skip: number = (pageNumber - 1) * limit;
+
       const response = await fetch(
-        `https://dummyjson.com/products?page=${pageNumber}&limit=10`
+        `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
       );
-      const { products } = await response.json();
-      setData((prevData) => [...prevData, ...products]);
+      const result = await response.json();
+      setData((prevData) => [...prevData, ...result?.products]);
+      if (data.length >= result.total) {
+        setHasMore(false);
+      }
     } catch (error) {
       console.log("Faild to fetch Data:", error);
     } finally {
       setIsLoading(false);
     }
+    console.log("data=========", data);
   };
 
   useEffect(() => {
     if (inView && !isLoading && hasMore) {
-      setPage((prevPage) => prevPage + 1);
+      setPage((prev) => prev + 1);
     }
   }, [inView, isLoading, hasMore]);
 
   useEffect(() => {
-    if (page === 1) {
-      fetchData(1);
-    }
+    fetchData(1);
   }, []);
 
+  useEffect(() => {
+    if (page > 1) {
+      fetchData(page);
+    }
+  }, [page]);
+
   return (
-    <div className="py-20 px-15 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div className="py-20 px-15 bg-white min-h-screen">
       <h1 className="font-extrabold text-center text-4xl text-gray-800 mb-10 ">
         DummyData
       </h1>
@@ -51,7 +62,7 @@ export default function DummyData() {
         {data?.map((product, index) => (
           <li
             key={index}
-            className="bg-white rounded-2xl hover:scale-105   p-6  items-center "
+            className=" rounded-2xl hover:scale-105   p-6  items-center "
           >
             <FackData data={product} />
           </li>
