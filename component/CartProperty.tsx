@@ -62,7 +62,7 @@ const CartProperty = () => {
                   onClick={() => {
                     handleRemove({ property_id: property?._id });
                   }}
-                  className="px-2 rounded-lg bg-orange-300 cursor-pointer hover:bg-orange-200"
+                  className="mx-4 px-2 rounded-lg bg-orange-300 cursor-pointer hover:bg-orange-200"
                 >
                   Remove
                 </button>

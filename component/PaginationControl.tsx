@@ -16,7 +16,7 @@ export const PaginationControl = () => {
   const totalPages: number = Math.ceil(totalData / dataPerPage);
 
   let currentPage: number = page;
-  let pageNumber: number[] = [];
+  const pageNumber: number[] = [];
 
   for (let i = currentPage - 2; i <= currentPage + 2; i++) {
     if (i < 1) continue;
@@ -25,8 +25,8 @@ export const PaginationControl = () => {
     pageNumber.push(i);
   }
 
-  if (Number(searchParams.page) >= 1) {
-    currentPage = Number(searchParams.page);
+  if (Number(searchParams?.page) >= 1) {
+    currentPage = Number(searchParams?.page);
   }
 
   console.log(pageNumber);
