@@ -4,14 +4,20 @@ import { Count } from "@/interface";
 import React from "react";
 import { create } from "zustand";
 
-const useCounterStore = create((set) => ({
+type store = {
+  count: number;
+  increase: () => void;
+  decrease: () => void;
+};
+
+const useCounterStore = create<store>((set) => ({
   count: 0,
   increase: () => set((state) => ({ count: state.count + 1 })),
   decrease: () => set((state) => ({ count: state.count - 1 })),
 }));
 
 const Zustand = () => {
-  const { count, increase, decrease } = useCounterStore<Count[] | null>();
+  const { count, increase, decrease } = useCounterStore();
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-whte from-orange-50 to-orange-100">
